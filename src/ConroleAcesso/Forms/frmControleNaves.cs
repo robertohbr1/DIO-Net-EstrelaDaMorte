@@ -79,8 +79,9 @@ namespace ConroleAcesso.Forms
             dgvNaves.Columns.Add(nomeNaveColumn);
 
             var naves = await _naveDao.ObterPorNomeLike(txtNomeNave.Text);
+            bool Checked = naves.Count == 1;
             foreach (var nave in naves)
-                dgvNaves.Rows.Add(nave.IdNave, false, nave.Nome);
+                dgvNaves.Rows.Add(nave.IdNave, Checked, nave.Nome);
 
             dgvNaves.PerformLayout();
             Cursor = Cursors.Default;
@@ -114,11 +115,22 @@ namespace ConroleAcesso.Forms
             dgvPilotos.Columns.Add(nomePilotoColumn);
 
             var pilotos = await _pilotoDao.ObterPorNomeLike(txtNomePiloto.Text);
+            bool Checked = pilotos.Count == 1;
             foreach (var piloto in pilotos)
-                dgvPilotos.Rows.Add(piloto.IdPiloto, false, piloto.Nome);
+                dgvPilotos.Rows.Add(piloto.IdPiloto, Checked, piloto.Nome);
 
             dgvNaves.PerformLayout();
             Cursor = Cursors.Default;
+        }
+
+        private void txtNomeNave_Leave(object sender, EventArgs e)
+        {
+            btnBuscarNave_Click(sender, e);
+        }
+
+        private void txtNomePiloto_Leave(object sender, EventArgs e)
+        {
+            btnBuscarPiloto_Click(sender, e);
         }
     }
 }

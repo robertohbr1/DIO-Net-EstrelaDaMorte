@@ -11,7 +11,7 @@ namespace ConroleAcesso.Dao
 
         protected DaoBase()
         {
-            con = new SqlConnection(@"Data Source=LAPTOP-053T257V\SQLEXPRESS;Initial Catalog=EstrelaDaMorte;Integrated Security=True;Connect Timeout=30");
+            con = new SqlConnection(@"Data Source=DESKTOP-VDQPO57;Initial Catalog=EstrelaDaMorte;Integrated Security=True;Connect Timeout=30");
         }
 
         protected async Task Insert(string comando)

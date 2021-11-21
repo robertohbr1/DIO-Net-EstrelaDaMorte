@@ -52,6 +52,7 @@ namespace ConroleAcesso.Forms
             this.txtNomeNave.Name = "txtNomeNave";
             this.txtNomeNave.Size = new System.Drawing.Size(620, 23);
             this.txtNomeNave.TabIndex = 0;
+            this.txtNomeNave.Leave += new System.EventHandler(this.txtNomeNave_Leave);
             // 
             // label1
             // 
@@ -77,6 +78,7 @@ namespace ConroleAcesso.Forms
             this.txtNomePiloto.Name = "txtNomePiloto";
             this.txtNomePiloto.Size = new System.Drawing.Size(620, 23);
             this.txtNomePiloto.TabIndex = 2;
+            this.txtNomePiloto.Leave += new System.EventHandler(this.txtNomePiloto_Leave);
             // 
             // dgvNaves
             // 
