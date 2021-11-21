@@ -7,3 +7,4 @@ Melhorias em relação ao projeto Original:
 
 Ainda vou fazer:
 - Ao buscar a Nave, se encontrar apenas uma, se estiver em Viagem, já buscar o Piloto, marcar como Chegada e executar o botão Avançar automaticamente
+- Informar o Planeta Origem e o Planeta Destino da Viagem.
