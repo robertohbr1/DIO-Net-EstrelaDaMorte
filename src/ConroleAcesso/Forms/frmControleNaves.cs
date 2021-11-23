@@ -1,19 +1,23 @@
-﻿using ConroleAcesso.Dao;
-using ConroleAcesso.Extensions;
+﻿using ControleAcesso.Dao;
+using ControleAcesso.Entidades;
+using ControleAcesso.Extensions;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ConroleAcesso.Forms
+namespace ControleAcesso.Forms
 {
     public partial class frmControleNaves : Form
     {
         private readonly PilotoDao _pilotoDao;
+        private readonly PlanetaDao _planetaDao;
         private readonly NaveDao _naveDao;
 
         public frmControleNaves()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
             _pilotoDao = new PilotoDao();
+            _planetaDao = new PlanetaDao();
             _naveDao = new NaveDao();
             InitializeComponent();
         }
@@ -38,9 +42,24 @@ namespace ConroleAcesso.Forms
                 return;
             }
 
+            if (dgvPlanetaOrigem.Rows.Count == 0 || dgvPlanetaOrigem.Rows.GetCountRowsChecked(1) != 1)
+            {
+                MessageBox.Show("É preciso selecionar apenas um Planeta Origem!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (dgvPlanetaDestino.Rows.Count == 0 || dgvPlanetaDestino.Rows.GetCountRowsChecked(1) != 1)
+            {
+                MessageBox.Show("É preciso selecionar apenas um Planeta Destino!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+
             var idPiloto = int.Parse(dgvPilotos.Rows[dgvPilotos.Rows.GetFirstIndexChecked(1)].Cells[0].Value.ToString());
             var idNave = int.Parse(dgvNaves.Rows[dgvNaves.Rows.GetFirstIndexChecked(1)].Cells[0].Value.ToString());
-            var frm = new frmRegistrarEntradaSaida(idNave, idPiloto, rdbChegando.Checked);
+            var idPlanetaOrigem = int.Parse(dgvPlanetaOrigem.Rows[dgvPlanetaOrigem.Rows.GetFirstIndexChecked(1)].Cells[0].Value.ToString());
+            var idPlanetaDestino = int.Parse(dgvPlanetaDestino.Rows[dgvPlanetaDestino.Rows.GetFirstIndexChecked(1)].Cells[0].Value.ToString());
+            var frm = new frmRegistrarEntradaSaida(idNave, idPiloto, idPlanetaOrigem, idPlanetaDestino, rdbChegando.Checked);
             frm.ShowDialog();
         }
 
@@ -48,6 +67,7 @@ namespace ConroleAcesso.Forms
         {
             _naveDao?.Dispose();
             _pilotoDao?.Dispose();
+            _planetaDao?.Dispose();
             Dispose();
         }
 
@@ -85,6 +105,41 @@ namespace ConroleAcesso.Forms
 
             dgvNaves.PerformLayout();
             Cursor = Cursors.Default;
+
+            if (dgvNaves.Rows.Count > 0 && dgvNaves.Rows.GetCountRowsChecked(1) == 1)
+            {
+                var _idNave = int.Parse(dgvNaves.Rows[dgvNaves.Rows.GetFirstIndexChecked(1)].Cells[0].Value.ToString());
+                using (var naveDao = new NaveDao())
+                {
+                    int? idPilotoComandante;
+                    
+                    idPilotoComandante = await naveDao.ObterComandante(_idNave);
+                    if (idPilotoComandante.HasValue)
+                    {
+                        rdbChegando.Checked = true;
+                        using (var pilotoDao = new PilotoDao())
+                        {
+                            Piloto _piloto = await pilotoDao.ObterPorId((int)idPilotoComandante);
+                            txtNomePiloto.Text = _piloto.Nome;
+                            txtNomePiloto_Leave(sender, e);
+                        }
+                        using (var planetaDao = new PlanetaDao())
+                        {
+                            int? idPlaneta = await naveDao.ObterPlanetaOrigem(_idNave);                            
+
+                            Planeta _planeta = await planetaDao.ObterPorId((int)idPlaneta);
+                            txtPlanetaOrigem.Text = _planeta.Nome;
+                            txtPlanetaOrigem_Leave(sender, e);
+
+                            idPlaneta = await naveDao.ObterPlanetaDestino(_idNave); 
+                            _planeta = await planetaDao.ObterPorId((int)idPlaneta);
+                            txtPlanetaDestino.Text = _planeta.Nome;
+                            txtPlanetaDestino_Leave(sender, e);
+                        }
+                    }
+                }
+            }           
+
         }
 
         private async void btnBuscarPiloto_Click(object sender, EventArgs e)
@@ -132,5 +187,64 @@ namespace ConroleAcesso.Forms
         {
             btnBuscarPiloto_Click(sender, e);
         }
+
+        private async void btnBuscarOrigem_Click(object sender, EventArgs e)
+        {
+            await CarregaNaves(dgvPlanetaOrigem, txtPlanetaOrigem);
+
+        }
+        private async void btnBuscarDestino_Click(object sender, EventArgs e)
+        {
+            await CarregaNaves(dgvPlanetaDestino, txtPlanetaDestino);
+        }
+
+        private async Task CarregaNaves(DataGridView dgvPlaneta, TextBox txtPlaneta)
+        {
+            dgvPlaneta.Rows.Clear();
+            dgvPlaneta.Columns.Clear();
+
+            if (string.IsNullOrEmpty(txtPlaneta.Text))
+                return;
+
+            Cursor = Cursors.WaitCursor;
+            DataGridViewTextBoxColumn idPlanetaColumn = new DataGridViewTextBoxColumn();
+            DataGridViewCheckBoxColumn checkPlanetaColumn = new DataGridViewCheckBoxColumn();
+            DataGridViewTextBoxColumn nomePlanetaColumn = new DataGridViewTextBoxColumn();
+
+            idPlanetaColumn.Visible = false;
+
+            idPlanetaColumn.ReadOnly = true;
+            checkPlanetaColumn.ReadOnly = false;
+            nomePlanetaColumn.ReadOnly = true;
+
+            nomePlanetaColumn.Width = 500;
+
+            dgvPlaneta.RowHeadersVisible = false;
+            dgvPlaneta.ColumnHeadersVisible = false;
+            dgvPlaneta.Columns.Add(idPlanetaColumn);
+            dgvPlaneta.Columns.Add(checkPlanetaColumn);
+            dgvPlaneta.Columns.Add(nomePlanetaColumn);
+
+            var Planetas = await _planetaDao.ObterPorNomeLike(txtPlaneta.Text);
+            bool Checked = Planetas.Count == 1;
+            foreach (var Planeta in Planetas)
+                dgvPlaneta.Rows.Add(Planeta.IdPlaneta, Checked, Planeta.Nome);
+
+            dgvNaves.PerformLayout();
+            Cursor = Cursors.Default;
+        }
+
+        private void txtPlanetaOrigem_Leave(object sender, EventArgs e)
+        {
+            btnBuscarOrigem_Click(sender, e);
+        }
+
+        private void txtPlanetaDestino_Leave(object sender, EventArgs e)
+        {
+            btnBuscarDestino_Click(sender, e);
+        }
+
+
+        
     }
 }

@@ -1,10 +1,10 @@
-﻿using ConroleAcesso.Entidades;
-using ConroleAcesso.Extensions;
+﻿using ControleAcesso.Entidades;
+using ControleAcesso.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ConroleAcesso.Dao
+namespace ControleAcesso.Dao
 {
     public class NaveDao : DaoBase
     {
@@ -74,13 +74,43 @@ namespace ConroleAcesso.Dao
 
             await Select(comando, resultadoSQL =>
             {
-                while(resultadoSQL.Read())
+                while (resultadoSQL.Read())
                 {
                     idPiloto = resultadoSQL.GetValueOrDefault<int?>("IdPiloto");
                 }
             });
 
             return idPiloto;
+        }
+        public async Task<int?> ObterPlanetaOrigem(int idNave)
+        {
+            int? idPlaneta = null;
+            var comando = $"select IdPlanetaOrigem from HistoricoViagens t1 where t1.IdNave = {idNave} and t1.DtChegada is null";
+
+            await Select(comando, resultadoSQL =>
+            {
+                while (resultadoSQL.Read())
+                {
+                    idPlaneta = resultadoSQL.GetValueOrDefault<int?>("IdPlanetaOrigem");
+                }
+            });
+
+            return idPlaneta;
+        }
+        public async Task<int?> ObterPlanetaDestino(int idNave)
+        {
+            int? idPlaneta = null;
+            var comando = $"select IdPlanetaDestino from HistoricoViagens t1 where t1.IdNave = {idNave} and t1.DtChegada is null";
+
+            await Select(comando, resultadoSQL =>
+            {
+                while (resultadoSQL.Read())
+                {
+                    idPlaneta = resultadoSQL.GetValueOrDefault<int?>("IdPlanetaDestino");
+                }
+            });
+
+            return idPlaneta;
         }
     }
 }

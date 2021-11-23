@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ConroleAcesso.ViewModels
+namespace ControleAcesso.ViewModels
 {
     public class ResultadoApi<ViewModel>
     {

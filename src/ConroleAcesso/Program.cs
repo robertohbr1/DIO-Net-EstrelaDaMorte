@@ -1,8 +1,8 @@
-using ConroleAcesso.Forms;
+using ControleAcesso.Forms;
 using System;
 using System.Windows.Forms;
 
-namespace ConroleAcesso
+namespace ControleAcesso
 {
     static class Program
     {

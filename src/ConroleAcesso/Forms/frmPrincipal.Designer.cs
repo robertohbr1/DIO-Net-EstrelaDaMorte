@@ -1,5 +1,5 @@
 ﻿
-namespace ConroleAcesso.Forms
+namespace ControleAcesso.Forms
 {
     partial class frmPrincipal
     {

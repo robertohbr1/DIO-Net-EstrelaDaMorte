@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace ConroleAcesso.Extensions
+namespace ControleAcesso.Extensions
 {
     public static class GridViewExtension
     {

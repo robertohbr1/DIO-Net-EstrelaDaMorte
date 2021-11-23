@@ -1,4 +1,4 @@
-﻿namespace ConroleAcesso.Entidades
+﻿namespace ControleAcesso.Entidades
 {
     public class Nave
     {

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace ConroleAcesso.ViewModels
+namespace ControleAcesso.ViewModels
 {
     public class NaveViewModel
     {

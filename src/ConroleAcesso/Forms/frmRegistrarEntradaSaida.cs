@@ -1,6 +1,6 @@
-﻿using ConroleAcesso.Dao;
-using ConroleAcesso.Entidades;
-using ConroleAcesso.ViewModels;
+﻿using ControleAcesso.Dao;
+using ControleAcesso.Entidades;
+using ControleAcesso.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,23 +11,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ConroleAcesso.Forms
+namespace ControleAcesso.Forms
 {
     public partial class frmRegistrarEntradaSaida : Form
     {
         private Piloto _piloto;
         private Piloto _pilotoComandante;
         private Nave _nave;
+        private Planeta _planetaOrigem;
+        private Planeta _planetaDestino;
         private int _idNave;
         private int _idPiloto;
+        private int _idPlanetaOrigem;
+        private int _idPlanetaDestino;
         private bool _chegada;
         private bool _pilotoViajando;
 
-        public frmRegistrarEntradaSaida(int idNave, int idPiloto, bool chegada)
+        public frmRegistrarEntradaSaida(int idNave, int idPiloto, int idPlanetaOrigem, int idPlanetaDestino, bool chegada)
         {
             this.StartPosition = FormStartPosition.CenterScreen;
             _idNave = idNave;
             _idPiloto = idPiloto;
+            _idPlanetaOrigem = idPlanetaOrigem;
+            _idPlanetaDestino = idPlanetaDestino;
             _chegada = chegada;            
 
             InitializeComponent();
@@ -53,21 +59,30 @@ namespace ConroleAcesso.Forms
                     _pilotoComandante = await pilotoDao.ObterPorId(idPilotoComandante.Value);
             }
 
+            using (var planetaDao = new PlanetaDao())
+            {
+                _planetaOrigem = await planetaDao.ObterPorId(_idPlanetaOrigem);
+                _planetaDestino = await planetaDao.ObterPorId(_idPlanetaDestino);
+            }
+
             lvAlertas.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             lvAlertas.PerformLayout();
 
             PreencherDadosNave();
             PreencherDadosPiloto();
 
+            lblOrigem.Text = _planetaOrigem.Nome;
+            lblDestino.Text = _planetaDestino.Nome;
+
             if (EhValido())
             {
                 btnRegistrar.Enabled = true;
-                this.Height = 228;
+                this.Height = 288;
             }
             else
             {
                 btnRegistrar.Enabled = false;
-                this.Height = 490;
+                this.Height = 528;
             }
 
             if (_chegada)
@@ -185,7 +200,7 @@ namespace ConroleAcesso.Forms
         private async Task RegistrarSaida()
         {
             using (var pilotoDao = new PilotoDao())
-                await pilotoDao.RegistrarInicioViagem(_idPiloto, _idNave);
+                await pilotoDao.RegistrarInicioViagem(_idPiloto, _idNave, _idPlanetaOrigem, _idPlanetaDestino);
         }
     }
 }

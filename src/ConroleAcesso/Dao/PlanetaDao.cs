@@ -1,9 +1,10 @@
-﻿using ConroleAcesso.Entidades;
+﻿using ControleAcesso.Extensions;
+using ControleAcesso.Entidades;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ConroleAcesso.Dao
+namespace ControleAcesso.Dao
 {
     public class PlanetaDao : DaoBase
     {
@@ -18,5 +19,48 @@ namespace ConroleAcesso.Dao
 
             await Insert(string.Join('\n', comandos));
         }
+        public async Task<Planeta> ObterPorId(int idPlaneta)
+        {
+            Planeta planeta = null;
+            var comando = @$"
+                                select	t1.*
+                                from	Planetas t1
+                                where	t1.IdPlaneta = {idPlaneta}";
+
+            await Select(comando, resultadoSQL =>
+            {
+                while (resultadoSQL.Read())
+                {
+                    planeta = new Planeta
+                    {
+                        IdPlaneta = resultadoSQL.GetValueOrDefault<int>("IdPlaneta"),
+                        Nome = resultadoSQL.GetValueOrDefault<string>("Nome")
+                    };
+                }
+            });
+
+            return planeta;
+        }
+
+        public async Task<List<Planeta>> ObterPorNomeLike(string nome)
+        {
+            var planetas = new List<Planeta>();
+            var comando = $"select * from Planetas where nome like '%{nome.Replace(' ', '%')}%'";
+
+            await Select(comando, resultadoSQL =>
+            {
+                while (resultadoSQL.Read())
+                {
+                    planetas.Add(new Planeta
+                    {
+                        IdPlaneta = resultadoSQL.GetValueOrDefault<int>("IdPlaneta"),
+                        Nome = resultadoSQL.GetValueOrDefault<string>("Nome")
+                    });
+                }
+            });
+
+            return planetas;
+        }
+
     }
 }

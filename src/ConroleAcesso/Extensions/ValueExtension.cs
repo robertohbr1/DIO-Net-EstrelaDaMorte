@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 
-namespace ConroleAcesso.Extensions
+namespace ControleAcesso.Extensions
 {
     public static class ValueExtension
     {

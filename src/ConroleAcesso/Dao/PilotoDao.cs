@@ -1,11 +1,11 @@
-﻿using ConroleAcesso.Entidades;
-using ConroleAcesso.Extensions;
+﻿using ControleAcesso.Entidades;
+using ControleAcesso.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConroleAcesso.Dao
+namespace ControleAcesso.Dao
 {
     public class PilotoDao : DaoBase
     {
@@ -21,12 +21,12 @@ namespace ConroleAcesso.Dao
             await Insert(string.Join('\n', comandos));
         }
 
-        public async Task RegistrarInicioViagem(int idPiloto, int idNave)
+        public async Task RegistrarInicioViagem(int idPiloto, int idNave, int idPlanetaOrigem, int idPlanetaDestino)
         {
             StringBuilder comando = new StringBuilder();
             comando.AppendLine($"if (not exists(select 1 from HistoricoViagens where IdPiloto = {idPiloto} and DtChegada is null))");
             comando.AppendLine($"begin");
-            comando.AppendLine($"   insert HistoricoViagens (IdNave, IdPiloto, DtSaida) values({idNave}, {idPiloto}, GetDate());");
+            comando.AppendLine($"   insert HistoricoViagens (IdNave, IdPiloto, IdPlanetaOrigem, IdPlanetaDestino, DtSaida) values({idNave}, {idPiloto}, {idPlanetaOrigem}, {idPlanetaDestino}, GetDate());");
             comando.AppendLine($"end");
 
             await Insert(string.Join('\n', comando.ToString()));

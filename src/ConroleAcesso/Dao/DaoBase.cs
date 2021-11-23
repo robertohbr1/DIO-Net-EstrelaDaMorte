@@ -3,7 +3,7 @@ using System;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
-namespace ConroleAcesso.Dao
+namespace ControleAcesso.Dao
 {
     public abstract class DaoBase: IDisposable
     {

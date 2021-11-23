@@ -1,5 +1,5 @@
 ﻿
-namespace ConroleAcesso.Forms
+namespace ControleAcesso.Forms
 {
     partial class frmControleNaves
     {
@@ -41,9 +41,19 @@ namespace ConroleAcesso.Forms
             this.btnAvancar = new System.Windows.Forms.Button();
             this.btnBuscarNave = new System.Windows.Forms.Button();
             this.btnBuscarPiloto = new System.Windows.Forms.Button();
+            this.btnBuscarOrigem = new System.Windows.Forms.Button();
+            this.dgvPlanetaOrigem = new System.Windows.Forms.DataGridView();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtPlanetaOrigem = new System.Windows.Forms.TextBox();
+            this.btnBuscarDestino = new System.Windows.Forms.Button();
+            this.dgvPlanetaDestino = new System.Windows.Forms.DataGridView();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtPlanetaDestino = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNaves)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPilotos)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlanetaOrigem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlanetaDestino)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNomeNave
@@ -66,7 +76,7 @@ namespace ConroleAcesso.Forms
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 221);
+            this.label2.Location = new System.Drawing.Point(9, 160);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 15);
             this.label2.TabIndex = 3;
@@ -74,7 +84,7 @@ namespace ConroleAcesso.Forms
             // 
             // txtNomePiloto
             // 
-            this.txtNomePiloto.Location = new System.Drawing.Point(56, 218);
+            this.txtNomePiloto.Location = new System.Drawing.Point(56, 157);
             this.txtNomePiloto.Name = "txtNomePiloto";
             this.txtNomePiloto.Size = new System.Drawing.Size(620, 23);
             this.txtNomePiloto.TabIndex = 2;
@@ -88,7 +98,7 @@ namespace ConroleAcesso.Forms
             this.dgvNaves.Location = new System.Drawing.Point(56, 41);
             this.dgvNaves.Name = "dgvNaves";
             this.dgvNaves.RowTemplate.Height = 25;
-            this.dgvNaves.Size = new System.Drawing.Size(693, 171);
+            this.dgvNaves.Size = new System.Drawing.Size(693, 109);
             this.dgvNaves.TabIndex = 4;
             // 
             // dgvPilotos
@@ -96,17 +106,17 @@ namespace ConroleAcesso.Forms
             this.dgvPilotos.AllowUserToAddRows = false;
             this.dgvPilotos.AllowUserToDeleteRows = false;
             this.dgvPilotos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPilotos.Location = new System.Drawing.Point(56, 247);
+            this.dgvPilotos.Location = new System.Drawing.Point(56, 186);
             this.dgvPilotos.Name = "dgvPilotos";
             this.dgvPilotos.RowTemplate.Height = 25;
-            this.dgvPilotos.Size = new System.Drawing.Size(693, 171);
+            this.dgvPilotos.Size = new System.Drawing.Size(693, 109);
             this.dgvPilotos.TabIndex = 5;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.rdbSaindo);
             this.groupBox1.Controls.Add(this.rdbChegando);
-            this.groupBox1.Location = new System.Drawing.Point(56, 425);
+            this.groupBox1.Location = new System.Drawing.Point(51, 587);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(257, 37);
             this.groupBox1.TabIndex = 6;
@@ -136,7 +146,7 @@ namespace ConroleAcesso.Forms
             // 
             // btnAvancar
             // 
-            this.btnAvancar.Location = new System.Drawing.Point(651, 435);
+            this.btnAvancar.Location = new System.Drawing.Point(646, 597);
             this.btnAvancar.Name = "btnAvancar";
             this.btnAvancar.Size = new System.Drawing.Size(75, 23);
             this.btnAvancar.TabIndex = 7;
@@ -156,7 +166,7 @@ namespace ConroleAcesso.Forms
             // 
             // btnBuscarPiloto
             // 
-            this.btnBuscarPiloto.Location = new System.Drawing.Point(682, 217);
+            this.btnBuscarPiloto.Location = new System.Drawing.Point(682, 156);
             this.btnBuscarPiloto.Name = "btnBuscarPiloto";
             this.btnBuscarPiloto.Size = new System.Drawing.Size(67, 23);
             this.btnBuscarPiloto.TabIndex = 9;
@@ -164,11 +174,95 @@ namespace ConroleAcesso.Forms
             this.btnBuscarPiloto.UseVisualStyleBackColor = true;
             this.btnBuscarPiloto.Click += new System.EventHandler(this.btnBuscarPiloto_Click);
             // 
+            // btnBuscarOrigem
+            // 
+            this.btnBuscarOrigem.Location = new System.Drawing.Point(682, 300);
+            this.btnBuscarOrigem.Name = "btnBuscarOrigem";
+            this.btnBuscarOrigem.Size = new System.Drawing.Size(67, 23);
+            this.btnBuscarOrigem.TabIndex = 13;
+            this.btnBuscarOrigem.Text = "Buscar";
+            this.btnBuscarOrigem.UseVisualStyleBackColor = true;
+            this.btnBuscarOrigem.Click += new System.EventHandler(this.btnBuscarOrigem_Click);
+            // 
+            // dgvPlanetaOrigem
+            // 
+            this.dgvPlanetaOrigem.AllowUserToAddRows = false;
+            this.dgvPlanetaOrigem.AllowUserToDeleteRows = false;
+            this.dgvPlanetaOrigem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPlanetaOrigem.Location = new System.Drawing.Point(56, 330);
+            this.dgvPlanetaOrigem.Name = "dgvPlanetaOrigem";
+            this.dgvPlanetaOrigem.RowTemplate.Height = 25;
+            this.dgvPlanetaOrigem.Size = new System.Drawing.Size(693, 109);
+            this.dgvPlanetaOrigem.TabIndex = 12;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 304);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 15);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Origem:";
+            // 
+            // txtPlanetaOrigem
+            // 
+            this.txtPlanetaOrigem.Location = new System.Drawing.Point(56, 301);
+            this.txtPlanetaOrigem.Name = "txtPlanetaOrigem";
+            this.txtPlanetaOrigem.Size = new System.Drawing.Size(620, 23);
+            this.txtPlanetaOrigem.TabIndex = 10;
+            this.txtPlanetaOrigem.Leave += new System.EventHandler(this.txtPlanetaOrigem_Leave);
+            // 
+            // btnBuscarDestino
+            // 
+            this.btnBuscarDestino.Location = new System.Drawing.Point(682, 442);
+            this.btnBuscarDestino.Name = "btnBuscarDestino";
+            this.btnBuscarDestino.Size = new System.Drawing.Size(67, 23);
+            this.btnBuscarDestino.TabIndex = 17;
+            this.btnBuscarDestino.Text = "Buscar";
+            this.btnBuscarDestino.UseVisualStyleBackColor = true;
+            this.btnBuscarDestino.Click += new System.EventHandler(this.btnBuscarDestino_Click);
+            // 
+            // dgvPlanetaDestino
+            // 
+            this.dgvPlanetaDestino.AllowUserToAddRows = false;
+            this.dgvPlanetaDestino.AllowUserToDeleteRows = false;
+            this.dgvPlanetaDestino.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPlanetaDestino.Location = new System.Drawing.Point(56, 472);
+            this.dgvPlanetaDestino.Name = "dgvPlanetaDestino";
+            this.dgvPlanetaDestino.RowTemplate.Height = 25;
+            this.dgvPlanetaDestino.Size = new System.Drawing.Size(693, 109);
+            this.dgvPlanetaDestino.TabIndex = 16;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 446);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(50, 15);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Destino:";
+            // 
+            // txtPlanetaDestino
+            // 
+            this.txtPlanetaDestino.Location = new System.Drawing.Point(56, 443);
+            this.txtPlanetaDestino.Name = "txtPlanetaDestino";
+            this.txtPlanetaDestino.Size = new System.Drawing.Size(620, 23);
+            this.txtPlanetaDestino.TabIndex = 14;
+            this.txtPlanetaDestino.Leave += new System.EventHandler(this.txtPlanetaDestino_Leave);
+            // 
             // frmControleNaves
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(763, 474);
+            this.ClientSize = new System.Drawing.Size(763, 631);
+            this.Controls.Add(this.btnBuscarDestino);
+            this.Controls.Add(this.dgvPlanetaDestino);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtPlanetaDestino);
+            this.Controls.Add(this.btnBuscarOrigem);
+            this.Controls.Add(this.dgvPlanetaOrigem);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtPlanetaOrigem);
             this.Controls.Add(this.btnBuscarPiloto);
             this.Controls.Add(this.btnBuscarNave);
             this.Controls.Add(this.btnAvancar);
@@ -185,6 +279,8 @@ namespace ConroleAcesso.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dgvPilotos)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlanetaOrigem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlanetaDestino)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,5 +300,13 @@ namespace ConroleAcesso.Forms
         private System.Windows.Forms.Button btnAvancar;
         private System.Windows.Forms.Button btnBuscarNave;
         private System.Windows.Forms.Button btnBuscarPiloto;
+        private System.Windows.Forms.Button btnBuscarOrigem;
+        private System.Windows.Forms.DataGridView dgvPlanetaOrigem;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtPlanetaOrigem;
+        private System.Windows.Forms.Button btnBuscarDestino;
+        private System.Windows.Forms.DataGridView dgvPlanetaDestino;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtPlanetaDestino;
     }
 }

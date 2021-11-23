@@ -1,5 +1,5 @@
 ﻿
-namespace ConroleAcesso.Forms
+namespace ControleAcesso.Forms
 {
     partial class frmRegistrarEntradaSaida
     {
@@ -47,9 +47,15 @@ namespace ConroleAcesso.Forms
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lvAlertas = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lblDestino = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblOrigem = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -203,7 +209,7 @@ namespace ConroleAcesso.Forms
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.lvAlertas);
-            this.groupBox3.Location = new System.Drawing.Point(12, 215);
+            this.groupBox3.Location = new System.Drawing.Point(12, 254);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(656, 223);
             this.groupBox3.TabIndex = 3;
@@ -230,11 +236,61 @@ namespace ConroleAcesso.Forms
             this.columnHeader1.Name = "columnHeader1";
             this.columnHeader1.Width = 650;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label9);
+            this.groupBox4.Controls.Add(this.lblDestino);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Controls.Add(this.lblOrigem);
+            this.groupBox4.Location = new System.Drawing.Point(12, 183);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(656, 53);
+            this.groupBox4.TabIndex = 4;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Planetas";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(330, 22);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(50, 15);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Destino:";
+            // 
+            // lblDestino
+            // 
+            this.lblDestino.AutoSize = true;
+            this.lblDestino.Location = new System.Drawing.Point(379, 22);
+            this.lblDestino.Name = "lblDestino";
+            this.lblDestino.Size = new System.Drawing.Size(38, 15);
+            this.lblDestino.TabIndex = 4;
+            this.lblDestino.Text = "label1";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(14, 24);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 15);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Origem:";
+            // 
+            // lblOrigem
+            // 
+            this.lblOrigem.AutoSize = true;
+            this.lblOrigem.Location = new System.Drawing.Point(63, 24);
+            this.lblOrigem.Name = "lblOrigem";
+            this.lblOrigem.Size = new System.Drawing.Size(38, 15);
+            this.lblOrigem.TabIndex = 2;
+            this.lblOrigem.Text = "label1";
+            // 
             // frmRegistrarEntradaSaida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 451);
+            this.ClientSize = new System.Drawing.Size(684, 484);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.groupBox2);
@@ -247,6 +303,8 @@ namespace ConroleAcesso.Forms
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -271,5 +329,10 @@ namespace ConroleAcesso.Forms
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ListView lvAlertas;
         private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblDestino;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblOrigem;
     }
 }

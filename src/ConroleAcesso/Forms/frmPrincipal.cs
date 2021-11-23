@@ -1,8 +1,8 @@
-﻿using ConroleAcesso.Servicos;
+﻿using ControleAcesso.Servicos;
 using System;
 using System.Windows.Forms;
 
-namespace ConroleAcesso.Forms
+namespace ControleAcesso.Forms
 {
     public partial class frmPrincipal : Form
     {

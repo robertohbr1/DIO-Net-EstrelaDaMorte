@@ -1,13 +1,13 @@
-﻿using ConroleAcesso.Dao;
-using ConroleAcesso.Entidades;
-using ConroleAcesso.ViewModels;
+﻿using ControleAcesso.Dao;
+using ControleAcesso.Entidades;
+using ControleAcesso.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
-namespace ConroleAcesso.Servicos
+namespace ControleAcesso.Servicos
 {
     public class SincronizadorService
     {
